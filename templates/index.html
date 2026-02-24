@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ASL AI Speller</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        color: white;
+        text-align: center;
+      }
+
+      h1 {
+        margin-top: 30px;
+        font-size: 40px;
+        letter-spacing: 2px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      .video-box {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      img {
+        width: 600px;
+        border-radius: 20px;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        width: 300px;
+      }
+
+      .letter-display {
+        font-size: 100px;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+
+      .word-display {
+        font-size: 32px;
+        letter-spacing: 4px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        background: #00c6ff;
+        color: white;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #0072ff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ASL AI Word Builder</h1>
+
+    <div class="container">
+      <div class="video-box">
+        <img src="{{ url_for('video') }}" />
+      </div>
+
+      <div class="panel">
+        <div class="letter-display" id="currentLetter">_</div>
+        <div class="word-display" id="wordDisplay"></div>
+
+        <button onclick="addLetter()">Add Letter</button>
+        <button onclick="speakWord()">Speak</button>
+        <button onclick="clearWord()">Clear</button>
+      </div>
+    </div>
+
+    <script>
+      let currentWord = "";
+      let currentLetter = "";
+
+      // Fetch prediction every 300ms
+      setInterval(async () => {
+        const response = await fetch("/get_letter");
+        const data = await response.json();
+        currentLetter = data.letter || "_";
+        document.getElementById("currentLetter").innerText = currentLetter;
+      }, 300);
+
+      function addLetter() {
+        if (currentLetter !== "_" && currentLetter !== "") {
+          currentWord += currentLetter;
+          document.getElementById("wordDisplay").innerText = currentWord;
+        }
+      }
+
+      function speakWord() {
+        if (currentWord.length > 0) {
+          let utterance = new SpeechSynthesisUtterance(currentWord);
+          speechSynthesis.speak(utterance);
+        }
+      }
+
+      function clearWord() {
+        currentWord = "";
+        document.getElementById("wordDisplay").innerText = "";
+      }
+    </script>
+  </body>
+</html>
