@@ -34,7 +34,7 @@ The model was trained using the **ASL Alphabet Dataset** available on Kaggle.
 
 **How to run locally**
 
-- git clone https://github.com/YOUR_USERNAME/asl-ai-speller.git
+- git clone [https://github.com/YOUR_USERNAME/asl-ai-speller.git](https://github.com/kh-a17/asl-ai-speller.git)
 
 - cd asl-ai-speller
 
