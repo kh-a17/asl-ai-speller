@@ -34,16 +34,15 @@ The model was trained using the **ASL Alphabet Dataset** available on Kaggle.
 
 **How to run locally**
 
-git clone https://github.com/YOUR_USERNAME/asl-ai-speller.git
+- git clone https://github.com/YOUR_USERNAME/asl-ai-speller.git
 
-cd asl-ai-speller
+- cd asl-ai-speller
 
-python -m venv venv
+- python -m venv venv
 
-source venv/bin/activate   # Mac/Linux
+  - source venv/bin/activate   # Mac/Linux
+  - venv\Scripts\activate      # Windows
 
-venv\Scripts\activate      # Windows
+- pip install -r requirements.txt
 
-pip install -r requirements.txt
-
-python app.py
+- python app.py
