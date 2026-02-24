@@ -23,6 +23,15 @@ https://github.com/user-attachments/assets/0b656429-d09a-463e-a011-0b50f5ade154
 Webcam → MediaPipe → Landmark Normalization → PyTorch Model → Flask Backend → Frontend UI → Speech Synthesis
 
 
+**Dataset**
+The model was trained using the **ASL Alphabet Dataset** available on Kaggle.
+
+- **Source:** [Kaggle - ASL Alphabet Dataset](https://www.kaggle.com/datasets/grassknoted/asl-alphabet)
+- **Dataset Structure:** 87,000 images of 200x200 pixels.
+- **Classes:** 29 total (Letters A-Z, plus space, delete, and nothing).
+- **Processing:** For this project, only the **landmarks** (coordinates) were used for training to ensure the model remains lightweight and focused on hand geometry rather than background pixels.
+
+
 **How to run locally**
 
 git clone https://github.com/YOUR_USERNAME/asl-ai-speller.git
